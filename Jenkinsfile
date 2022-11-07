@@ -24,17 +24,11 @@ pipeline {
 
 	stage ('Build') {
             steps {
-                bat 'mvn clean build' 
+                bat 'mvn clean' 
+                bat 'mvn package' 
+                
             }
         }
-
-	
-	stage ('Deploy') {
-            steps {
-                echo "Deployment" 
-            }
-        }
-
 
         stage ('Test') {
             steps {
@@ -46,5 +40,12 @@ pipeline {
                     junit 'target/surefire-reports/**/*.xml' 
                 }
             }
-
+        }
         
+        stage ('Deploy') {
+            steps {
+                echo "Deployment steps here" 
+            }
+        }
+    }
+}   
