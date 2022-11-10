@@ -5,7 +5,7 @@ def javaVersion = 'Java 19'
 pipeline {
     options {
         timeout (time: 5, unit: 'MINUTES') // timeout after 5 minutes
-        retry(1)  // if the build fails try one more time
+        retry(2)  // if the build fails try one more time
     }
     agent any
     tools {
