@@ -33,7 +33,7 @@ pipeline {
 	stage ('Build') {
             steps {
                 bat 'mvn clean'
-                bat 'mvn package'
+                bat 'mvn package -DskipTests'  //skip running the UI tests until later
             }
         }
 
@@ -54,7 +54,9 @@ pipeline {
 
         stage ('Test') {
             steps {
-                bat 'mvn test'
+                bat 'mvn surefire:test'
+                bat 'mvn surefire-report:report-only'
+                bat 'mvn site -DgenerateReports=false'
             }
             post {
                 always {
@@ -62,7 +64,7 @@ pipeline {
                 }
                 success {
                     // Displays 'Test Results' in menu on build page
-                    junit 'target/surefire-reports/**/*.xml'
+                    junit 'target/site/surefire-report.html'
                 }
                 failure {
                     echo "Test Failure"
