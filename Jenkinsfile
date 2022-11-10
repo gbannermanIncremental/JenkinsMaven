@@ -64,7 +64,7 @@ pipeline {
                 }
                 success {
                     junit 'target/surefire-reports/**/*.xml' // Displays 'Test Results' in menu on build page
-                    archiveArtifacts artifacts: 'target/surefire-reports/**'  // Displays files for html reports
+                    archiveArtifacts artifacts: 'target/site/**'  // Displays files for html reports
                 }
                 failure {
                     echo "Test Failure"
