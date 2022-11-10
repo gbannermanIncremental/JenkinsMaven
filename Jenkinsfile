@@ -63,8 +63,8 @@ pipeline {
                     echo "The tests have run"
                 }
                 success {
-                    // Displays 'Test Results' in menu on build page
-                    junit 'target/site/surefire-report.html'
+                    junit 'target/surefire-reports/**/*.xml' // Displays 'Test Results' in menu on build page
+                    archiveArtifacts artifacts: 'target/surefire-reports/**'  // Displays files for html reports
                 }
                 failure {
                     echo "Test Failure"
